@@ -1,0 +1,41 @@
+services:
+    postgres:
+      image: postgres
+      networks:
+        - local-app
+      environment:
+        POSTGRES_PASSWORD: 123456
+      volumes:
+        - ./volumes/posgres:/var/lib/postgresql/data
+      ports:
+        - "5432:5432"
+    phpmyadmin:
+      image: dpage/pgadmin4
+      networks:
+        - local-app
+      depends_on:
+        - postgres
+      ports:
+        - "9000:80"
+      environment:
+        PGADMIN_DEFAULT_PASSWORD: 123456
+        PGADMIN_DEFAULT_EMAIL: root@gmail.com
+    redis:
+        image: redis
+        networks:
+            - local-app
+        ports:
+            - "6380:6379"
+    test-soa:
+      image:  duongsonn/sondth-test-soa:latest
+      networks:
+        - local-app
+      depends_on:
+        - postgres
+        - redis
+      volumes:
+        - ./volumes/test-soa:/app/logs
+
+networks:
+    local-app:
+        driver: bridge
