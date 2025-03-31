@@ -1,3 +1,8 @@
+CREATE DATABASE test_soa;
+
+-- Connect to the database
+\c test_soa;
+
 -- Enable UUID extension
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
