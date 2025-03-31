@@ -28,6 +28,7 @@
 ```bash
 docker compose up -d
 ```
+then create database name: "test_soa" then run the cmd `docker compose up -d` again.
 
 ## Structure
 
